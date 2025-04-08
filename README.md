@@ -92,3 +92,12 @@ Model addNewModelForBrand(int brandId, String modelName, int modelAveragePrice);
 Model updateModel(int id, int averagePrice);
 List<Model> findModelsBetweenPriceRange(int minAveragePrice, int maxAveragePrice);
 ~~~
+
+### Testing
+
+Se pueden hacer __testing manual__ de los __endpoints__ y consultar su __documentación__
+en `localhost:8080/swagger-ui/index.html` o desde cualquier cliente http, por ejemplo:
+
+~~~
+$ curl -X GET http://localhost:8080/brands
+~~~
