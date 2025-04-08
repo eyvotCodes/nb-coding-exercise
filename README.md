@@ -1,5 +1,7 @@
 # Nexu Coding Exercise
 
+### Database
+
 Script para producir output SQL partiendo de `./models.json` del repositorio de la prueba.
 
 ~~~python
@@ -61,3 +63,32 @@ $ python3 ./models2sql.py > data.sql
 
 > Se puede acceder a un _playground_ de H2 en el `localhost:8080/h2-console` para interactuar
 > con la base de datos (en la práctica se usó para validar el setup de la misma).
+
+### Contratos
+
+Contrato para el __API REST__ (métodos de los endpoints a implementar).
+
+~~~java
+List<Brand> listBrands(); // GET /brands
+List<Model> listModelsForBrand(int brandId); // GET /brands/:id/models
+Brand registerNewBrand(String name); // POST /brands
+Model registerNewModelForBrand(int brandId, String modelName, int modelAveragePrice); // POST /brands/:id/models
+Model editModel(int id, int averagePrice); // PUT /models/:id
+List<Model> listModelsForRangeOfPrices(int greater, int lower); // GET /models?greater=&lower=
+~~~
+
+Contrato para el repositorio de datos de marcas de coche.
+
+~~~java
+List<Brand> findAllBrandsCalculatingAverage();
+Brand addNewBrand(String name);
+~~~
+
+Contrato para el repositorio de datos de modelos de coche.
+
+~~~java
+List<Model> findAllModelsForBrand(int brandId);
+Model addNewModelForBrand(int brandId, String modelName, int modelAveragePrice);
+Model updateModel(int id, int averagePrice);
+List<Model> findModelsBetweenPriceRange(int minAveragePrice, int maxAveragePrice);
+~~~
