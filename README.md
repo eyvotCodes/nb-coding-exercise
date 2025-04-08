@@ -101,3 +101,80 @@ en `localhost:8080/swagger-ui/index.html` o desde cualquier cliente http, por ej
 ~~~
 $ curl -X GET http://localhost:8080/brands
 ~~~
+
+También se pueden ejecutar __pruebas automatizadas__, se alcanzaron a crear las siguientes:
+
+1. __Test de Integración__ para verificar el precio promedio de las marcas, ya que se calcula
+   desde la base de datos.
+2. __Test E2E__ para el endpoint `GET /brands`.
+
+Para ejecutar las pruebas automatizadas, solo hay que ejecutar en el root del proyecto:
+
+~~~
+$ mvn test
+~~~
+
+Se producirá un output que entre su texto incluye lo siguiente:
+
+~~~
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+ 
+...
+ 
+Hibernate:     SELECT
+        b.id,
+        b.name,
+        FLOOR(AVG(m.average_price)) AS average_price
+    FROM brands b
+    LEFT JOIN car_models m ON m.brand_id = b.id
+    GROUP BY b.id, b.name
+    ORDER BY b.id
+
+✔ Should return brands with the average price of their related models
+  Found 61 brands in total (showing only those in the example)
+    ↳ Acura → avg: 702,109
+    ↳ Audi → avg: 630,759
+    ↳ Bentley → avg: 3,342,575
+    ↳ BMW → avg: 858,702
+    ↳ Buick → avg: 290,371
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.155 s
+
+...
+
+✔ GET /brands → List all brands
+  Found 2943 characters in total response
+  Example brands in JSON response...
+{
+  "id" : 1,
+  "name" : "Acura",
+  "average_price" : 702109
+},
+{
+  "id" : 2,
+  "name" : "Audi",
+  "average_price" : 630759
+},
+{
+  "id" : 3,
+  "name" : "Bentley",
+  "average_price" : 3342575
+},
+{
+  "id" : 4,
+  "name" : "BMW",
+  "average_price" : 858702
+},
+{
+  "id" : 5,
+  "name" : "Buick",
+  "average_price" : 290371
+},
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.033 s
+~~~
