@@ -48,3 +48,16 @@ print(",\n".join(model_values) + ";")
 > Si bien, solo se observa una colección "models" (modelos de coches), se infiere que, 
 > además de una entidad "Model" también debería existir una "Brand" para las marcas, ya
 > que existe un endpoint para registrar nuevas marcas de coche.
+
+_Spring Boot_ busca por defecto los archivos `schema.sql` y `data.sql` en el
+directorio `./src/mian/resources` para configurar la base de datos, así que así se encuentran
+en el proyecto. El archivo `schema.sql` se hizo de forma manual, mientras que el `data.sql` se
+generó redireccionando el output del script de migración para escribir un nuevo archivo:
+
+~~~
+$ chmod +x models2sql.py # agregar permisos de ejecución al script
+$ python3 ./models2sql.py > data.sql
+~~~
+
+> Se puede acceder a un _playground_ de H2 en el `localhost:8080/h2-console` para interactuar
+> con la base de datos (en la práctica se usó para validar el setup de la misma).
