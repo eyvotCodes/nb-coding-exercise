@@ -1,0 +1,25 @@
+<entity-mappings version="2.1"
+                 xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+                 http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <entity class="com.eyvot.nbce.domian.entity.Brand" access="PROPERTY">
+        <table name="brands"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+        </attributes>
+    </entity>
+
+    <entity class="com.eyvot.nbce.domian.entity.Model" access="PROPERTY">
+        <table name="car_models"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+        </attributes>
+    </entity>
+
+</entity-mappings>
